@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3b41a64d-314d-4122-b522-7c0ccaff18b6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tungay" class="java.util.Date"/>
+	<parameter name="denngay" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     Count(`NgayLamViec`) AS songaylamviec
+FROM
+     `hopdong` hopdong INNER JOIN `nhanvien` nhanvien ON hopdong.`MAHD` = nhanvien.`MAHD`
+     INNER JOIN `chucvu` chucvu ON hopdong.`MACV` = chucvu.`MACV`
+     INNER JOIN `phongban` phongban ON chucvu.`MAPB` = phongban.`MAPB`
+     LEFT JOIN `ngaylamviec` ngaylamviec ON nhanvien.`MANV` = ngaylamviec.`MANV`
+GROUP BY nhanvien.`MANV`
+HAVING (ngaylamviec.NgayLamViec>=$P{tungay} and ngaylamviec.NgayLamViec<=$P{denngay}) or ngaylamviec.NgayLamViec=null
+ORDER BY
+     hopdong.`MACV` ASC,
+     hopdong.`MAHD` ASC,
+     nhanvien.`MANV` ASC]]>
+	</queryString>
+	<field name="MACV" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NGAYBATDAU" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NGAYHETHAN" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TIENLUONG" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TENCV" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAHD" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MANV" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TENNV" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NgayLamViec" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GIOITINH" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SDT" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DIACHI" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TAIKHOAN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAPB" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TENPB" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="songaylamviec" class="java.lang.Long"/>
+	<group name="PhongBan">
+		<groupExpression><![CDATA[$F{MAPB}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="97" height="20" backcolor="#999999" uuid="ef7a709b-04c7-4e3c-aff8-5501b6d181c0"/>
+					<textFieldExpression><![CDATA[$F{TENPB}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="189" y="20" width="199" height="20" uuid="af9274f3-7dcd-4390-9d77-ead87d50033e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Báo cáo chuyên cần]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="1776d49b-c3e6-490f-91cc-183ccbaf287d"/>
+				<text><![CDATA[Tên công việc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="9f424a2b-2a53-4fd1-aca1-8c1e320349bb"/>
+				<text><![CDATA[Mã hợp đồng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="09c35a5b-bedb-4e6d-a261-b7625ee05b83"/>
+				<text><![CDATA[Mã nhân viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="82a286ee-761f-4846-9d27-4d4693c7e120"/>
+				<text><![CDATA[Tên nhân viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="100" height="20" uuid="e420446c-87fa-405a-8d0b-a4afc1fecaff"/>
+				<text><![CDATA[Số ngày làm việc]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="12b452d9-387a-4993-8bc5-8de466257767"/>
+				<textFieldExpression><![CDATA[$F{TENCV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="8bef2e9b-c956-4161-a233-67135cb357bc"/>
+				<textFieldExpression><![CDATA[$F{MAHD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="d7fce47e-9785-4b32-8516-916a443e6b25"/>
+				<textFieldExpression><![CDATA[$F{MANV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="6b66f770-a3f2-492e-aaa5-e06e33d3ccc1"/>
+				<textFieldExpression><![CDATA[$F{TENNV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="100" height="20" uuid="82e24894-8233-45c8-8d0b-f1a0cdfa896f"/>
+				<textFieldExpression><![CDATA[$F{songaylamviec}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

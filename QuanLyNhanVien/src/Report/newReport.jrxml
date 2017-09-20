@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3c4cfd9d-0cff-42e3-a5f6-1e00634baad8">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<queryString>
+		<![CDATA[SELECT
+     *,count(nhanvien.`MANV`) as soNV
+FROM
+     `hopdong` hopdong INNER JOIN `chucvu` chucvu ON hopdong.`MACV` = chucvu.`MACV`
+     INNER JOIN `phongban` phongban ON chucvu.`MAPB` = phongban.`MAPB`
+     LEFT JOIN `nhanvien` nhanvien ON hopdong.`MAHD` = nhanvien.`MAHD`
+GROUP BY hopdong.`MAHD`
+ORDER BY phongban.`MAPB`,chucvu.`MACV`]]>
+	</queryString>
+	<field name="MAHD" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MACV" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NGAYBATDAU" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NGAYHETHAN" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TIENLUONG" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TENCV" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAPB" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TENPB" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DIACHI" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MANV" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TENNV" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GIOITINH" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SDT" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TAIKHOAN" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="soNV" class="java.lang.Long"/>
+	<variable name="SoHD" class="java.lang.Integer" resetType="Group" resetGroup="Phong Ban" calculation="Count">
+		<variableExpression><![CDATA[$F{MAHD}]]></variableExpression>
+	</variable>
+	<group name="Phong Ban">
+		<groupExpression><![CDATA[$F{MAPB}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="111" height="25" backcolor="#999999" uuid="734dacb7-edcb-45c9-8bdb-859ca6214392"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TENPB}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="35">
+				<textField>
+					<reportElement x="519" y="0" width="36" height="20" uuid="0c169aa2-42ed-4297-b254-41949939a5fe"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SoHD}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="419" y="0" width="100" height="20" uuid="3654535d-ca93-469e-8c22-662290eb3d76"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman"/>
+					</textElement>
+					<text><![CDATA[Số hợp đồng:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="111" y="0" width="321" height="54" uuid="f5c9bda9-eba2-4a02-8c4b-a3b0178d9a7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BÁO CÁO HỢP ĐỒNG]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="111" y="0" width="60" height="20" uuid="066cac0b-7289-485e-81f3-609798cce879"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã hợp đồng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="0" width="99" height="20" uuid="ad1d2726-4596-4e98-b4d7-fac37962b5e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày bắt đầu]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="111" height="20" uuid="5ad5bf25-6cf4-412f-b862-9616cd7f5e17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày kết thúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="381" y="0" width="89" height="20" uuid="4d260f1c-273a-4fe0-9b8f-65cb3749c065"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiền lương/ ngày]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="1" width="85" height="20" uuid="13c756e6-8344-4f32-b990-211d6341729d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số Nhân Viên]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="111" y="0" width="60" height="20" uuid="aaa21b00-c2e0-4a6f-8217-57fd1ad6e2e7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MAHD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="171" y="0" width="99" height="20" uuid="636889d9-958d-4282-acc8-9df164ec8cff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NGAYBATDAU}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="270" y="1" width="111" height="20" uuid="dea2d2ef-198b-4b2e-b15e-c4b90d6ff7b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NGAYHETHAN}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="381" y="1" width="89" height="20" uuid="9c1290e2-40b5-469c-a421-cda70d00348d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIENLUONG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="111" height="21" backcolor="#CCCCCC" uuid="5bae57c6-6f5c-45ad-b217-b4f99b49bf45"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TENCV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="1" width="85" height="20" uuid="38878940-1ad9-48a1-93d6-ee47a066da02"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{soNV}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
